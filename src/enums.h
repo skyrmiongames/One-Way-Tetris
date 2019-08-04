@@ -19,3 +19,11 @@ enum Direction {
 	COUNTER,
 	DOWN
 };
+
+enum Shape {
+	LINE,
+	SQUARE,
+	CROSS,
+	LEFT,
+	RIGHT
+};

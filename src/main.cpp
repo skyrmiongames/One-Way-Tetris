@@ -8,6 +8,7 @@
 //Game headers
 #include "GridMaker.h"
 #include "TileMap.hpp"
+#include "Shape.h"
 
 //X11 multithreading on linux
 #include <X11/Xlib.h>
@@ -31,7 +32,6 @@ void renderingThread(TileMap *map) {
 		window.draw(*map);
 
 		//Draw general nodes
-		UpdateList::draw(window);
 
 		//Confirm changes
 		window.display();
@@ -41,25 +41,22 @@ void renderingThread(TileMap *map) {
 }
 
 int main() {
-	bool testMode = false;
-
 	//Start game window
 	XInitThreads();
-	
 	sf::Clock clock;
 
-	//Set texture loader
-	Textures *mainTextures = new Textures();
-	Node::textures = mainTextures;
-
-
+	//Load main resources
+	Node::textures.loadFromFile("resources/tiles/TileMap.png");
 	std::string file = "resources/maps/full_map.txt";
 
 	//Load base tile map
 	GridMaker::build_grid(file);
 	TileMap map;
-    if (!map.load("resources/tiles/TileMap_Enviro.png", sf::Vector2u(16, 16), GridMaker::index_grid(), GridMaker::WIDTH, GridMaker::HEIGHT))
+    if (!map.load("resources/tiles/TileMap.png", sf::Vector2u(16, 16), GridMaker::index_grid(), GridMaker::WIDTH, GridMaker::HEIGHT))
         return -1;
+
+    //Load all entities
+    Shape shapes[3];
 
 	//Set frame rate manager
 	double nextFrame = 0;

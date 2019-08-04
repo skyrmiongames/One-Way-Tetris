@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "enums.h"
 #include "textures.h"
+#include "GridMaker.h"
 
 /*
  * Single square with collision
@@ -14,26 +15,15 @@ class Node : public sf::Sprite
 private:
 	//Node variables
 	sf::Vector2i size;
-	bool deleted = false;
+	int color;
 
 public:
 	//Random static variables
-	static Textures *textures;
+	static Texture *texture;
 
-	//Node constructors
-	Node(sf::Vector2i size = sf::Vector2i(16, 16));
-
-	//Base getters
-	sf::Vector2i get_size();
+	//Reset node
+	set(sf::Vector2i size = sf::Vector2i(16, 16), int color);
 
 	//Calculate rotation
 	sf::Vector2i rotate(bool clockwise, sf::Vector2i origin);
-
-	//Proper deletion procedure
-	bool get_delete();
-	void set_delete();
-	virtual ~Node();
-
-	//Entity implementation
-	virtual void update(double time);
 };

@@ -5,36 +5,17 @@
  */
 
 //static variable reference thing
-Textures *Node::textures;
+sf::Texture texture;
 
 //Base constructor
-Node::Node(sf::Vector2i size) {
-	this->layer = layer;
+Node::set(sf::Vector2i size, int color) {
 	this->size = size;
 
+	setTextureRect(sf::IntRect (16 * color, 16, 16 * color + 16, 32));
 	setOrigin(size.x / 2, size.y / 2);
-}
-
-//Get collision size
-sf::Vector2i Node::get_size() {
-	return size;
 }
 
 //Get rotated position
 sf::Vector2i Node::rotate(bool clockwise, sf::Vector2i origin) {
 	return false;
 }
-
-//Check for deletion mark
-bool Node::get_delete() {
-	return deleted;
-}
-
-//Mark for deletion
-void Node::set_delete() {
-	deleted = true;
-}
-Node::~Node() {}
-
-//Define virtual placeholders
-void Node::update(double time) {}

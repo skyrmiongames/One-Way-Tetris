@@ -1,7 +1,6 @@
 #include "GridMaker.h"
 
 /*
- * Created by Stuart Irwin on 4/16/2019.
  * Generates and stores main tilemap
  */
 
@@ -29,13 +28,12 @@ void GridMaker::build_grid(std::string file) {
 }
 
 //Convert char[][] to int[][]
-int* GridMaker::index_grid(bool animated) {
+int* GridMaker::index_grid() {
 	//Loop through tiles
 	for(int y = 0; y < HEIGHT; y++)
 		for(int x = 0; x < WIDTH; x++) {
 			//Get tile texture index
-			indexes[x + y * WIDTH] = animated ? 
-				animated_index_tile(tiles[y][x]) : index_tile(tiles[y][x]);
+			indexes[x + y * WIDTH] = index_tile(tiles[y][x]);
 		}
 
 	return indexes;
@@ -44,24 +42,25 @@ int* GridMaker::index_grid(bool animated) {
 //Get integer index of tile texture
 int GridMaker::index_tile(char c) {
 	switch(c) {
+		case '.':
+			return 1;
 		case '#':
 			return 0;
 		case '1':
 			return 3;
 		case '2':
-			return 3;
+			return 4;
 		case '3':
-			return 3;
+			return 5;
 		case '4':
-			return 3;
-		case ' '
+			return 5;
 		default:
-			return 1;
+			return 2;
 	}
 }
 
 //Get tile char from grid
-char GridMaker::get_tile(sf::Vector2f position) {
+char GridMaker::get_tile(sf::Vector2i position) {
 	int x = position.x / 16;
 	int y = position.y / 16;
 
@@ -69,13 +68,13 @@ char GridMaker::get_tile(sf::Vector2f position) {
 }
 
 //Get tile phase from grid
-TileType GridMaker::check_tile(sf::Vector2f position) {
+TileType GridMaker::check_tile(sf::Vector2i position) {
 	char c = get_tile(position);
 
 	switch(c) {
 		case '#':
 			return WALL;
-		case ' ':
+		case '.':
 			return EMPTY;
 		default:
 			return BLOCK;
@@ -83,7 +82,7 @@ TileType GridMaker::check_tile(sf::Vector2f position) {
 }
 
 //Set tile properties
-void GridMaker::set_tile(sf::Vector2f position, char value) {
+void GridMaker::set_tile(sf::Vector2i position, char value) {
 	int x = position.x / 16;
 	int y = position.y / 16;
 
