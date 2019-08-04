@@ -1,8 +1,7 @@
 #include "Node.h"
 
 /*
- * Created by Stuart Irwin on 4/16/2019.
- * Sprite with collision
+ * Single square with collision
  */
 
 //static variable reference thing
@@ -21,9 +20,9 @@ sf::Vector2i Node::get_size() {
 	return size;
 }
 
-//Get collision layer
-CollisionLayer Node::get_layer() {
-	return layer;
+//Get rotated position
+sf::Vector2i Node::rotate(bool clockwise, sf::Vector2i origin) {
+	return false;
 }
 
 //Check for deletion mark

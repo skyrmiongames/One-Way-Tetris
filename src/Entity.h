@@ -6,52 +6,64 @@
 
 #include <math.h>
 
+/*
+ * Collection of squares
+ */
 
-class Entity : public Node {
-
+class Entity {
 public:
-	Entity(
-		CollisionLayer _layer = ENEMY,
-		sf::Vector2i _size = sf::Vector2i(10, 16),
-		double _speed = 1.0,
-	) : Node(_layer, _size), speed(_speed)
-	{
-		
-	}
-
+	Entity() {}
 	~Entity() {}
 
-	bool move(
-		Direction dir = DOWN,
-		float distance = 16,
-	) {
-		int xOffset = 0;
-		int yOffset = 0;
+	bool move(Direction dir = DOWN) {
+		if(dir == CLOCK || dir == COUNTER)
+			return rotate(dir == CLOCK)
+		return linear(dir);
+	}
 
+	//Move in linear direction
+	bool linear(Direction dir = DOWN) {
+		sf::Vector2i offset();
+
+		//Set linear movement
 		switch(dir) {
 			case LEFT:
-				xOffset = -1;
+				offset.x = -speed;
 				break;
 			case RIGHT:
-				xOffset = -1;
+				offset.x = speed;
 				break;
 			case DOWN:
-				yOffset = 1;
+				offset.y = speed;
 				break;
 		}
 
-		sf::Vector2f target(getPosition().x + xOffset, getPosition().y + yOffset);
-		TileType targetType = GridMaker::check_tile(target);
-
-		if (targetType != EMPTY) {
-			setPosition(sf::Vector2f(target.x, target.y));
-			return true;
+		//Test all parts
+		for(int i = 0; i < 4; i++) {
+			sf::Vector2i target = nodes[i].getPosition() + offset;
+			if(GridMaker::check_tile(target) != EMPTY)
+				return false;
 		}
+
+		//Move all parts
+		for(int j = 0; j < 4; j++)
+			nodes[j].setPosition(nodes[i].getPosition() + offset);
+		
+		//Move origin
+		origin.x += xOffset;
+		origin.y += yOffset;
 		return false;
+	}
+
+	//Rotate
+	bool rotate(bool clockwise) {
+
 	}
 
 	// virtual void update() {};
 
 protected:
-	double speed;
+	sf::Vector2i origin;
+	int speed = 16;
+	Node nodes[4];
 };

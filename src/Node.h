@@ -6,8 +6,7 @@
 #include "textures.h"
 
 /*
- * Created by Stuart Irwin on 4/13/2019.
- * Sprite with collision
+ * Single square with collision
  */
 
 class Node : public sf::Sprite
@@ -26,6 +25,9 @@ public:
 
 	//Base getters
 	sf::Vector2i get_size();
+
+	//Calculate rotation
+	sf::Vector2i rotate(bool clockwise, sf::Vector2i origin);
 
 	//Proper deletion procedure
 	bool get_delete();

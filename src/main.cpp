@@ -6,14 +6,15 @@
 #include <thread>
 
 //Game headers
-
+#include "GridMaker.h"
+#include "TileMap.hpp"
 
 //X11 multithreading on linux
 #include <X11/Xlib.h>
 
 bool running = true;
 
-void renderingThread(Player *player, TileMap *map) {
+void renderingThread(TileMap *map) {
 	sf::RenderWindow window(sf::VideoMode(1200, 800), "One Way Tetris");
 
     //Run rendering loop
@@ -51,10 +52,8 @@ int main() {
 	Textures *mainTextures = new Textures();
 	Node::textures = mainTextures;
 
-	//Mode variables
-	NodeSpawner *spawner = new FullSpawner();
+
 	std::string file = "resources/maps/full_map.txt";
-	sf::Vector2f startPos = sf::Vector2f(456, 480);
 
 	//Load base tile map
 	GridMaker::build_grid(file);
@@ -66,7 +65,7 @@ int main() {
 	double nextFrame = 0;
 
 	//Start rendering thread
-	std::thread rendering(renderingThread, player, &map);
+	std::thread rendering(renderingThread, &map);
 
     //Run main window
 	while (running) {
@@ -75,7 +74,7 @@ int main() {
 			//Next update time
 			nextFrame = clock.getElapsedTime().asSeconds() + .001;
 
-			
+
 		}
 	}
 
