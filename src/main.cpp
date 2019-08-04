@@ -71,8 +71,6 @@ int main() {
 		if(clock.getElapsedTime().asSeconds() >= nextFrame) {
 			//Next update time
 			nextFrame = clock.getElapsedTime().asSeconds() + .001;
-
-
 		}
 	}
 
