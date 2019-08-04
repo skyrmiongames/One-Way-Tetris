@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Node.h"
-#include "enums.h"
+#include "ShapeMaps.hpp"
 
 #include <math.h>
 #include <vector>
@@ -21,7 +21,7 @@ public:
 	bool rotate(bool clockwise);
 
 	//Start + end
-	void generate(Shape shape);
+	void generate(ShapeType shape, sf::Vector2f position);
 	void lock();
 
 	void drawParts(sf::RenderWindow &window);

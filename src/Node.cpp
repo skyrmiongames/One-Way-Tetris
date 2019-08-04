@@ -5,10 +5,10 @@
  */
 
 //static variable reference thing
-sf::Texture texture;
+sf::Texture *Node::texture;
 
 //Base constructor
-Node::set(sf::Vector2i size, int color) {
+void Node::set(int color, sf::Vector2i size) {
 	this->size = size;
 
 	setTextureRect(sf::IntRect (16 * color, 16, 16 * color + 16, 32));
@@ -17,5 +17,5 @@ Node::set(sf::Vector2i size, int color) {
 
 //Get rotated position
 sf::Vector2i Node::rotate(bool clockwise, sf::Vector2i origin) {
-	return false;
+	return sf::Vector2i();
 }

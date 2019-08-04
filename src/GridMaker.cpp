@@ -60,7 +60,7 @@ int GridMaker::index_tile(char c) {
 }
 
 //Get tile char from grid
-char GridMaker::get_tile(sf::Vector2i position) {
+char GridMaker::get_tile(sf::Vector2f position) {
 	int x = position.x / 16;
 	int y = position.y / 16;
 
@@ -68,7 +68,7 @@ char GridMaker::get_tile(sf::Vector2i position) {
 }
 
 //Get tile phase from grid
-TileType GridMaker::check_tile(sf::Vector2i position) {
+TileType GridMaker::check_tile(sf::Vector2f position) {
 	char c = get_tile(position);
 
 	switch(c) {
@@ -82,7 +82,7 @@ TileType GridMaker::check_tile(sf::Vector2i position) {
 }
 
 //Set tile properties
-void GridMaker::set_tile(sf::Vector2i position, char value) {
+void GridMaker::set_tile(sf::Vector2f position, char value) {
 	int x = position.x / 16;
 	int y = position.y / 16;
 

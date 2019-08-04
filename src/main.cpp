@@ -1,6 +1,5 @@
 //SFML headers
 #include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 
 #include <string>
 #include <thread>
@@ -46,8 +45,9 @@ int main() {
 	sf::Clock clock;
 
 	//Load main resources
-	Node::textures.loadFromFile("resources/tiles/TileMap.png");
+	Node::texture->loadFromFile("resources/tiles/TileMap.png");
 	std::string file = "resources/maps/full_map.txt";
+	ShapeMaps::build();
 
 	//Load base tile map
 	GridMaker::build_grid(file);
@@ -56,7 +56,8 @@ int main() {
         return -1;
 
     //Load all entities
-    Shape shapes[3];
+    Shape *falling = new Shape();
+    Shape *queue = new Shape();
 
 	//Set frame rate manager
 	double nextFrame = 0;

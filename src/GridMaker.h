@@ -20,7 +20,7 @@ public:
 
 	//Build and convert grid
 	static void build_grid(std::string file);
-	static int* index_grid(bool animated=false);
+	static int* index_grid();
 	static int index_tile(char c);
 	
 	//Retrieve tile properties

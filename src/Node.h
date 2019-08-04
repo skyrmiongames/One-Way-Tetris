@@ -3,7 +3,6 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "enums.h"
-#include "textures.h"
 #include "GridMaker.h"
 
 /*
@@ -12,17 +11,17 @@
 
 class Node : public sf::Sprite
 {
-private:
+protected:
 	//Node variables
 	sf::Vector2i size;
 	int color;
 
 public:
 	//Random static variables
-	static Texture *texture;
+	static sf::Texture *texture;
 
 	//Reset node
-	set(sf::Vector2i size = sf::Vector2i(16, 16), int color);
+	void set(int color, sf::Vector2i size = sf::Vector2i(16, 16));
 
 	//Calculate rotation
 	sf::Vector2i rotate(bool clockwise, sf::Vector2i origin);
